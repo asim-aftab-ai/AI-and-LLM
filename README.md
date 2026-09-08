@@ -1,6 +1,6 @@
 # AI and LLM Learning Workspace
 
-A hands-on workspace exploring core concepts in Generative AI, Large Language Models (LLMs), tokenization, conversational architectures, and prompt engineering through practical, beginner-friendly Streamlit applications.
+A hands-on workspace exploring core concepts in Generative AI, Large Language Models (LLMs), tokenization, conversational architectures, prompt engineering, and system prompts through practical, beginner-friendly Streamlit applications.
 
 ---
 
@@ -26,8 +26,13 @@ AI and LLM/
 │   ├── requirements.txt
 │   └── README.md
 │
-└── project-03-ai-writing-assistant/    # Project 03: Prompt Engineering Writing Assistant
-    ├── app.py                          # Streamlit writing assistant UI
+├── project-03-ai-writing-assistant/    # Project 03: Prompt Engineering Writing Assistant
+│   ├── app.py                          # Streamlit writing assistant UI
+│   ├── requirements.txt
+│   └── README.md
+│
+└── project-04-dubai-business-writer/   # Project 04: System Prompts & Personas
+    ├── app.py                          # Streamlit executive assistant UI
     ├── requirements.txt
     └── README.md
 ```
@@ -51,6 +56,11 @@ AI and LLM/
 - **Core Concepts:** Prompt engineering principles, role prompting, explicit task instructions, tone and length constraints, negative constraints, and structured output formatting via OpenRouter.
 - **Key Takeaway:** Structuring prompts with explicit roles, guidelines, and output constraints yields predictable, high-quality responses compared to raw user queries.
 
+### Project 04: Dubai Business Writer (System Prompts & Personas)
+- **Folder:** [`project-04-dubai-business-writer/`](./project-04-dubai-business-writer/)
+- **Core Concepts:** System prompts, persona design, UAE commercial etiquette, behavioral boundaries, and strict architectural separation between system instructions and user tasks.
+- **Key Takeaway:** Foundation models are general-purpose; the system prompt gives the assistant its specialized persona, cultural etiquette, and professional boundaries, while the user provides the task.
+
 ---
 
 ## Getting Started
@@ -65,7 +75,7 @@ Open PowerShell at the root of `AI and LLM`:
 
 ### 2. Configure API Secrets
 
-For projects using OpenRouter (Projects 02 & 03), create `.streamlit/secrets.toml` inside the respective project folder:
+For projects using OpenRouter (Projects 02, 03, & 04), create `.streamlit/secrets.toml` inside the respective project folder:
 
 ```toml
 OPENROUTER_API_KEY = "your-openrouter-api-key-here"
@@ -88,5 +98,9 @@ streamlit run app.py
 
 # Example: Run Project 03
 cd project-03-ai-writing-assistant
+streamlit run app.py
+
+# Example: Run Project 04
+cd project-04-dubai-business-writer
 streamlit run app.py
 ```

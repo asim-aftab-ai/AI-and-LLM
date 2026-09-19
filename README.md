@@ -31,8 +31,16 @@ AI and LLM/
 │   ├── requirements.txt
 │   └── README.md
 │
-└── project-04-dubai-business-writer/   # Project 04: System Prompts & Personas
-    ├── app.py                          # Streamlit executive assistant UI
+├── project-04-dubai-business-writer/   # Project 04: System Prompts & Personas
+│   ├── app.py                          # Streamlit executive assistant UI
+│   ├── requirements.txt
+│   └── README.md
+│
+└── project-05-(huggingface-sentiment)/ # Project 05: Hugging Face Sentiment Analysis
+    ├── app.py                          # Streamlit application entrypoint
+    ├── main.py                         # Streamlit UI & interactive playground
+    ├── sentiment_analyzer.py           # DistilBERT pipeline inference
+    ├── sentences.py                    # Benchmark test sentences
     ├── requirements.txt
     └── README.md
 ```
@@ -60,6 +68,11 @@ AI and LLM/
 - **Folder:** [`project-04-dubai-business-writer/`](./project-04-dubai-business-writer/)
 - **Core Concepts:** System prompts, persona design, UAE commercial etiquette, behavioral boundaries, and strict architectural separation between system instructions and user tasks.
 - **Key Takeaway:** Foundation models are general-purpose; the system prompt gives the assistant its specialized persona, cultural etiquette, and professional boundaries, while the user provides the task.
+
+### Project 05: Hugging Face Sentiment Analysis
+- **Folder:** [`project-05-(huggingface-sentiment)/`](./project-05-(huggingface-sentiment)/)
+- **Core Concepts:** Transformer pipelines, local neural inference with PyTorch, DistilBERT architecture, binary classification fine-tuning (SST-2), and confidence score interpretation.
+- **Key Takeaway:** High-level Hugging Face pipelines abstract tokenization, model loading, and forward passes into a simple API while running deterministic classification locally without external API dependencies.
 
 ---
 
@@ -102,5 +115,9 @@ streamlit run app.py
 
 # Example: Run Project 04
 cd project-04-dubai-business-writer
+streamlit run app.py
+
+# Example: Run Project 05
+cd "project-05-(huggingface-sentiment)"
 streamlit run app.py
 ```

@@ -36,11 +36,16 @@ AI and LLM/
 │   ├── requirements.txt
 │   └── README.md
 │
-└── project-05-(huggingface-sentiment)/ # Project 05: Hugging Face Sentiment Analysis
-    ├── app.py                          # Streamlit application entrypoint
-    ├── main.py                         # Streamlit UI & interactive playground
-    ├── sentiment_analyzer.py           # DistilBERT pipeline inference
-    ├── sentences.py                    # Benchmark test sentences
+├── project-05-(huggingface-sentiment)/ # Project 05: Hugging Face Sentiment Analysis
+│   ├── app.py                          # Streamlit application entrypoint
+│   ├── main.py                         # Streamlit UI & interactive playground
+│   ├── sentiment_analyzer.py           # DistilBERT pipeline inference
+│   ├── sentences.py                    # Benchmark test sentences
+│   ├── requirements.txt
+│   └── README.md
+│
+└── project-06-arabic-morphology/       # Project 06: Arabic Morphological Analysis
+    ├── main.py                         # Streamlit learning interface & CAMeL Tools pipeline
     ├── requirements.txt
     └── README.md
 ```
@@ -73,6 +78,11 @@ AI and LLM/
 - **Folder:** [`project-05-(huggingface-sentiment)/`](./project-05-(huggingface-sentiment)/)
 - **Core Concepts:** Transformer pipelines, local neural inference with PyTorch, DistilBERT architecture, binary classification fine-tuning (SST-2), and confidence score interpretation.
 - **Key Takeaway:** High-level Hugging Face pipelines abstract tokenization, model loading, and forward passes into a simple API while running deterministic classification locally without external API dependencies.
+
+### Project 06: Arabic Morphological Analysis with CAMeL Tools
+- **Folder:** [`project-06-arabic-morphology/`](./project-06-arabic-morphology/)
+- **Core Concepts:** Arabic linguistic processing layers, word tokenization (`simple_word_tokenize`), morphological analysis with Modern Standard Arabic databases (`MorphologyDB` / `calima-msa-r13`), root and lemma extraction, grammatical feature decoding (POS, gender, number, aspect, case), and orthographic normalization.
+- **Key Takeaway:** Generic tokenizers treat Arabic as raw character sequences; Arabic-aware morphological analysis exposes internal linguistic properties (roots, lemmas, clitics) vital for downstream retrieval, RAG, and LLM systems.
 
 ---
 
@@ -120,4 +130,8 @@ streamlit run app.py
 # Example: Run Project 05
 cd "project-05-(huggingface-sentiment)"
 streamlit run app.py
+
+# Example: Run Project 06
+cd project-06-arabic-morphology
+streamlit run main.py
 ```

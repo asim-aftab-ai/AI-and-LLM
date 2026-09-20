@@ -44,8 +44,20 @@ AI and LLM/
 │   ├── requirements.txt
 │   └── README.md
 │
-└── project-06-arabic-morphology/       # Project 06: Arabic Morphological Analysis
-    ├── main.py                         # Streamlit learning interface & CAMeL Tools pipeline
+├── project-06-arabic-morphology/       # Project 06: Arabic Morphological Analysis
+│   ├── main.py                         # Streamlit learning interface & CAMeL Tools pipeline
+│   ├── requirements.txt
+│   └── README.md
+│
+├── project-07-semantic-similarity-tool/ # Project 07: Semantic Similarity Tool
+│   ├── app.py                          # Streamlit application entrypoint
+│   ├── similarity_engine.py            # Sentence embeddings & cosine similarity logic
+│   ├── requirements.txt
+│   └── README.md
+│
+└── project-08-ai-pdf-research-assistant/ # Project 08: AI PDF Research Assistant
+    ├── app.py                          # Streamlit application entrypoint
+    ├── src/                            # Modular pipeline (PDF, cleaning, retrieval, LLM)
     ├── requirements.txt
     └── README.md
 ```
@@ -84,6 +96,16 @@ AI and LLM/
 - **Core Concepts:** Arabic linguistic processing layers, word tokenization (`simple_word_tokenize`), morphological analysis with Modern Standard Arabic databases (`MorphologyDB` / `calima-msa-r13`), root and lemma extraction, grammatical feature decoding (POS, gender, number, aspect, case), and orthographic normalization.
 - **Key Takeaway:** Generic tokenizers treat Arabic as raw character sequences; Arabic-aware morphological analysis exposes internal linguistic properties (roots, lemmas, clitics) vital for downstream retrieval, RAG, and LLM systems.
 
+### Project 07: Semantic Similarity Tool
+- **Folder:** [`project-07-semantic-similarity-tool/`](./project-07-semantic-similarity-tool/)
+- **Core Concepts:** Sentence embeddings, dense vector representations, local transformer inference (`all-MiniLM-L6-v2`), mean pooling over token embeddings, and cosine similarity metric calculation.
+- **Key Takeaway:** Keyword matching fails when different words express the same meaning; semantic embeddings project sentences into a geometric vector space where conceptual similarity is accurately captured by vector angles.
+
+### Project 08: AI PDF Research Assistant
+- **Folder:** [`project-08-ai-pdf-research-assistant/`](./project-08-ai-pdf-research-assistant/)
+- **Core Concepts:** PDF text extraction (`pypdf`), text normalization and `.txt` export, sliding-window chunking, dense semantic vector retrieval via local Transformers, grounded question answering with strict anti-hallucination guardrails, and multi-turn conversational memory.
+- **Key Takeaway:** Merging document extraction, dense semantic retrieval, and conversational history creates a coherent research workflow where answers are strictly grounded in document evidence and follow-up questions retain context.
+
 ---
 
 ## Getting Started
@@ -98,7 +120,7 @@ Open PowerShell at the root of `AI and LLM`:
 
 ### 2. Configure API Secrets
 
-For projects using OpenRouter (Projects 02, 03, & 04), create `.streamlit/secrets.toml` inside the respective project folder:
+For projects using OpenRouter (Projects 02, 03, 04, & 08), create `.streamlit/secrets.toml` inside the respective project folder:
 
 ```toml
 OPENROUTER_API_KEY = "your-openrouter-api-key-here"
@@ -134,4 +156,12 @@ streamlit run app.py
 # Example: Run Project 06
 cd project-06-arabic-morphology
 streamlit run main.py
+
+# Example: Run Project 07
+cd project-07-semantic-similarity-tool
+streamlit run app.py
+
+# Example: Run Project 08
+cd project-08-ai-pdf-research-assistant
+streamlit run app.py
 ```

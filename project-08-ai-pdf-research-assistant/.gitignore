@@ -1,0 +1,12 @@
+# Project secrets and local environment
+.env
+.env.local
+.streamlit/secrets.toml
+__pycache__/
+*.py[cod]
+
+# Data uploads and extracted documents (keep directories tracked)
+data/uploads/*
+!data/uploads/.gitkeep
+data/extracted/*
+!data/extracted/.gitkeep

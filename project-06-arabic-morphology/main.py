@@ -16,6 +16,7 @@ from camel_tools.utils.normalize import (
     normalize_alef_maksura_ar,
     normalize_teh_marbuta_ar,
 )
+from translator import translate_to_english
 
 # Configure Streamlit page (Strictly NO emojis)
 st.set_page_config(
@@ -265,7 +266,20 @@ def render_section_2_input():
             unsafe_allow_html=True,
         )
 
-    return sentence.strip() if sentence.strip() else default_text
+    clean_sentence = sentence.strip() if sentence.strip() else default_text
+    sentence_translation = translate_to_english(clean_sentence)
+
+    st.markdown(
+        f"""
+        <div style="margin-top: 0.3rem; margin-bottom: 0.8rem; padding: 0.6rem 0.9rem; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.05em;">English Meaning (Learning Aid):</div>
+            <div style="font-size: 0.98rem; color: #f1f5f9; margin-top: 0.2rem;">{sentence_translation}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    return clean_sentence
 
 
 def render_section_3_pipeline_flow(active_stage):
@@ -336,9 +350,14 @@ def render_section_4_tokenization(sentence):
             f'<div class="arabic-display">{sentence}</div>',
             unsafe_allow_html=True,
         )
+        sentence_en = translate_to_english(sentence)
         st.markdown(
             f"""
-                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 0.5rem;">
+                <div style="margin-top: 0.6rem; border-top: 1px solid #334155; padding-top: 0.5rem;">
+                    <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700; text-transform: uppercase;">English Meaning:</span>
+                    <div style="font-size: 0.95rem; color: #f1f5f9; margin-top: 0.2rem;">{sentence_en}</div>
+                </div>
+                <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 0.5rem;">
                     Character Count: {len(sentence)} | Whitespace Segments: {len(sentence.split())}
                 </div>
             </div>
@@ -413,15 +432,27 @@ def render_section_5_and_6_morphology(tokens, analyzer):
             analyses = analyzer.analyze(token)
             all_analyses_by_token[token] = analyses
 
+            # Determine English meaning for this Arabic token
+            token_meaning = translate_to_english(token)
+            if (not token_meaning or token_meaning == token) and analyses:
+                token_meaning = analyses[0].get("gloss", "N/A")
+
             st.markdown(
                 f"""
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                    <div>
-                        <span style="font-size: 1.3rem; font-weight: bold; font-family: 'Segoe UI', Arial; direction: rtl;">{token}</span>
-                        <span style="color: #94a3b8; font-size: 0.85rem; margin-left: 0.8rem;">({len(analyses)} candidate analyses returned)</span>
-                    </div>
-                    <div style="font-size: 0.75rem; color: #38bdf8; font-family: monospace;">
-                        Status: Analyzed via MorphologyDB (calima-msa-r13)
+                <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid #334155; border-radius: 6px; padding: 0.8rem 1rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem;">
+                        <div>
+                            <div style="font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Arabic Word:</div>
+                            <div style="font-size: 1.5rem; font-weight: bold; font-family: 'Segoe UI', Arial; direction: rtl; color: #f8fafc;">{token}</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.72rem; color: #38bdf8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">English Meaning:</div>
+                            <div style="font-size: 1.15rem; font-weight: 600; color: #38bdf8;">{token_meaning}</div>
+                        </div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; font-family: monospace; text-align: right;">
+                            Status: Analyzed via MorphologyDB (calima-msa-r13)<br>
+                            ({len(analyses)} candidate analyses returned)
+                        </div>
                     </div>
                 </div>
                 """,
@@ -585,9 +616,13 @@ def render_section_8_why_morphology_matters(all_analyses):
     for token, analyses in all_analyses.items():
         if analyses:
             first = analyses[0]
+            token_meaning = translate_to_english(token)
+            if not token_meaning or token_meaning == token:
+                token_meaning = first.get("gloss", "N/A")
             collected_relationships.append(
                 {
                     "token": token,
+                    "meaning": token_meaning,
                     "root": first.get("root", "N/A"),
                     "lemma": first.get("lex", "N/A"),
                     "pos": first.get("pos", "N/A"),
@@ -628,11 +663,16 @@ def render_section_8_why_morphology_matters(all_analyses):
             for item in collected_relationships:
                 st.markdown(
                     f"""
-                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #1e293b; padding: 0.3rem 0; font-size: 0.85rem;">
-                        <span style="font-family: 'Segoe UI'; font-size: 1rem; direction: rtl;">{item['token']}</span>
-                        <span style="color: #38bdf8;">Root: <strong>{item['root']}</strong></span>
-                        <span style="color: #94a3b8;">Lemma: {item['lemma']}</span>
-                        <span style="color: #64748b;">({item['pos']})</span>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1e293b; padding: 0.4rem 0; font-size: 0.85rem; flex-wrap: wrap; gap: 0.4rem;">
+                        <div>
+                            <span style="font-family: 'Segoe UI'; font-size: 1.05rem; direction: rtl; font-weight: 600;">{item['token']}</span>
+                            <span style="color: #94a3b8; font-size: 0.82rem; margin-left: 0.4rem;">({item['meaning']})</span>
+                        </div>
+                        <div>
+                            <span style="color: #38bdf8;">Root: <strong>{item['root']}</strong></span>
+                            <span style="color: #cbd5e1; margin-left: 0.4rem;">Lemma: {item['lemma']}</span>
+                            <span style="color: #64748b; font-size: 0.78rem;">[{item['pos']}]</span>
+                        </div>
                     </div>
                     """,
                     unsafe_allow_html=True,

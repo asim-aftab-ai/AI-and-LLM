@@ -54,10 +54,16 @@ AI and LLM/
 │   ├── similarity_engine.py            # Sentence embeddings & cosine similarity logic
 │   ├── requirements.txt
 │   └── README.md
+├── project-08-ai-pdf-research-assistant/ # Project 08: AI PDF Research Assistant
+│   ├── app.py                          # Streamlit application entrypoint
+│   ├── src/                            # Modular pipeline (PDF, cleaning, retrieval, LLM)
+│   ├── requirements.txt
+│   └── README.md
 │
-└── project-08-ai-pdf-research-assistant/ # Project 08: AI PDF Research Assistant
-    ├── app.py                          # Streamlit application entrypoint
-    ├── src/                            # Modular pipeline (PDF, cleaning, retrieval, LLM)
+└── project-09-research-assistant-ui/       # Project 09: Streamlit UI for Research Assistant
+    ├── app.py                          # Streamlit UI entrypoint
+    ├── test_ui_integration.py          # Integration verification tests
+    ├── test_e2e_research_flow.py       # End-to-end research workflow test
     ├── requirements.txt
     └── README.md
 ```
@@ -106,6 +112,11 @@ AI and LLM/
 - **Core Concepts:** PDF text extraction (`pypdf`), text normalization and `.txt` export, sliding-window chunking, dense semantic vector retrieval via local Transformers, grounded question answering with strict anti-hallucination guardrails, and multi-turn conversational memory.
 - **Key Takeaway:** Merging document extraction, dense semantic retrieval, and conversational history creates a coherent research workflow where answers are strictly grounded in document evidence and follow-up questions retain context.
 
+### Project 09: Streamlit UI for AI Research Assistant
+- **Folder:** [`project-09-research-assistant-ui/`](./project-09-research-assistant-ui/)
+- **Core Concepts:** Professional UI design, Conversation-Answer-Evidence paradigm, sidebar document management, expandable citation cards with authentic retrieval metadata (page number, chunk ID, relevance score), session state caching, and clean separation between backend and presentation logic.
+- **Key Takeaway:** A production-style AI research application requires restrained, predictable UI workflows that elevate verified source evidence without overwhelming the researcher with unnecessary complexity or duplicate backend logic.
+
 ---
 
 ## Getting Started
@@ -120,7 +131,7 @@ Open PowerShell at the root of `AI and LLM`:
 
 ### 2. Configure API Secrets
 
-For projects using OpenRouter (Projects 02, 03, 04, & 08), create `.streamlit/secrets.toml` inside the respective project folder:
+For projects using OpenRouter (Projects 02, 03, 04, 08, & 09), create `.streamlit/secrets.toml` inside the respective project folder:
 
 ```toml
 OPENROUTER_API_KEY = "your-openrouter-api-key-here"
@@ -163,5 +174,9 @@ streamlit run app.py
 
 # Example: Run Project 08
 cd project-08-ai-pdf-research-assistant
+streamlit run app.py
+
+# Example: Run Project 09
+cd project-09-research-assistant-ui
 streamlit run app.py
 ```

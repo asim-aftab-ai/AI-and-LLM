@@ -114,6 +114,7 @@ AI and LLM/
 
 ### Project 09: Streamlit UI for AI Research Assistant
 - **Folder:** [`project-09-research-assistant-ui/`](./project-09-research-assistant-ui/)
+- **Live Demo:** [https://research-assistant-rpzr.onrender.com/](https://research-assistant-rpzr.onrender.com/)
 - **Core Concepts:** Professional UI design, Conversation-Answer-Evidence paradigm, sidebar document management, expandable citation cards with authentic retrieval metadata (page number, chunk ID, relevance score), session state caching, and clean separation between backend and presentation logic.
 - **Key Takeaway:** A production-style AI research application requires restrained, predictable UI workflows that elevate verified source evidence without overwhelming the researcher with unnecessary complexity or duplicate backend logic.
 

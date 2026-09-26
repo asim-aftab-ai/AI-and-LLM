@@ -1,5 +1,7 @@
 # Project 09: Professional Streamlit UI for AI Research Assistant
 
+> 🌐 **Live Demo:** [https://research-assistant-rpzr.onrender.com/](https://research-assistant-rpzr.onrender.com/)
+
 A clean, research-grade web application built around the existing AI Research Assistant pipeline. This project wraps the PDF extraction, text cleaning, semantic chunking, dense vector retrieval, and grounded multi-turn conversation engine from **Project 08** into an intuitive user interface without duplicating or rewriting the underlying backend logic.
 
 ---
@@ -155,6 +157,7 @@ Or run via the shared virtual environment binary from the workspace root:
 ```
 
 The application will be accessible at:
+- **Live Deployment:** [https://research-assistant-rpzr.onrender.com/](https://research-assistant-rpzr.onrender.com/)
 - **Local:** `http://localhost:8501`
 
 ---
